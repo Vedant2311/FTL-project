@@ -7,4 +7,4 @@ A method for solving this problem of Zero-stretch for dynamic simulations based 
   - It has a lot of artificial damping
   - No proof of correctness was given for this method
   
-
+This work deals with tackling with these problems to improve the DFTL give an algorithm which solves the zero extension problem, is physically accurate (in the limits of the time step size tending to zero) and does not have such high artificial damping
