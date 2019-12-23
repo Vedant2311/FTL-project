@@ -150,7 +150,7 @@ end
 count = 1;
 
 % Storing selected Images for the Animation video to be processed
-for t = 1: 400: totalTimeFrames
+for t = 1: 100: totalTimeFrames
     
     h = figure('visible','off');
     
