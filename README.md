@@ -23,3 +23,6 @@ All the codes are built on the same situation of an inextensible thread, assumed
 
 5. **DFTL_Orig.m**: The System is implemented by the Dynamic Follow the Leader Method, as mentioned in the Matthias paper
 
+## About the Videos
+
+All the outputs are given on the situation of a thread of length 10m, consisting of 11 particles, with the mass of each particle being 1 Kg. The gravity constant is taken as 9.8 m/s2. The Spring constant is 1000 SI units and the damping constant is 5 SI units. Also, the time step is 0.0005s and the total time for the algorithm to run is 10 seconds. The names of the videos correspond to their respective algorithms
