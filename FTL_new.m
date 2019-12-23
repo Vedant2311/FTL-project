@@ -38,7 +38,6 @@ m =1;       %Mass of the particles
 r = 1;      %Initial length between the particles
 
 Total_Energy = 0;   %Initializing the Total Energy
-value = [];
 
 for t= 2:totalTimeFrames
    
@@ -99,30 +98,25 @@ for t= 2:totalTimeFrames
         Energy_New = Energy_New + (1/2) * m * ((VelX_mat(i,t))^2 + (VelY_mat(i,t))^2);
         
     end
-    value = [value Energy_New];
-
-    Energy_Temp = 0;
-    diff = Total_Energy - Energy_New;
-    if (diff > 30)
+    
+    
+    if (Energy_New > Total_Energy)
         
         for i=2: size
 
-            VelX_mat(i,t) = (X_mat(i,t) - X_mat(i,t-1))/(delta_time) + (s_damp) * (DeltaX_vect(i+1))/(delta_time);
-            VelY_mat(i,t) = (Y_mat(i,t) - Y_mat(i,t-1))/(delta_time) + (s_damp) * (DeltaY_vect(i+1))/(delta_time);
-            Energy_Temp = Energy_Temp + (1/2) * m * ((VelX_mat(i,t))^2 + (VelY_mat(i,t))^2);
+            VelX_mat(i,t) = (X_mat(i,t) - X_mat(i,t-1))/(delta_time) - 2*(s_damp) * (DeltaX_vect(i+1))/(delta_time);
+            VelY_mat(i,t) = (Y_mat(i,t) - Y_mat(i,t-1))/(delta_time) - 2*(s_damp) * (DeltaY_vect(i+1))/(delta_time);
 
         end
-
-        Energy_Final = Energy_Temp + Energy_Gravity;
         
-        if (Energy_Final - Total_Energy > 60)
-            
-            for i=2: size
+    
+    elseif (Total_Energy - Energy_New > 30)
 
-                VelX_mat(i,t) = (X_mat(i,t) - X_mat(i,t-1))/(delta_time) + 0.01 * (s_damp) * (DeltaX_vect(i+1))/(delta_time);
-                VelY_mat(i,t) = (Y_mat(i,t) - Y_mat(i,t-1))/(delta_time) + 0.01 * (s_damp) * (DeltaY_vect(i+1))/(delta_time);
-            end
-            
+        for i=2: size
+
+            VelX_mat(i,t) = (X_mat(i,t) - X_mat(i,t-1))/(delta_time);
+            VelY_mat(i,t) = (Y_mat(i,t) - Y_mat(i,t-1))/(delta_time) ;
+
         end
         
     end
