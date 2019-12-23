@@ -24,12 +24,12 @@ end
 g = 9.81;   %Acceleration due to gravity, modified to fit the ideal assumption
 m =1;       %Mass of the particles
 
-k_s = 1700.0;   %The spring force constant
+k_s = 1000.0;   %The spring force constant
 
 
 r = 1;      %Initial length
 
-k_d = 20;   % The damping constant
+k_d = 5;   % The damping constant
 
 force_X = zeros(size,totalTimeFrames);    %Storing the instantaneous X force
 force_Y = zeros(size,totalTimeFrames);    %Storing the instantaneous Y force
