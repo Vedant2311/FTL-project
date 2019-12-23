@@ -92,7 +92,7 @@ end
 count = 1;
 
 % Storing the Sampled Images for making the Animation
-for t = 1: 500: totalTimeFrames
+for t = 1: 100: totalTimeFrames
     
     h = figure('visible','off');
     
