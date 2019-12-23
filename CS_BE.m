@@ -95,7 +95,7 @@ cons_n = zeros(size -1, 1);
 
 % Jacobian and it's transpose 
 Jtn = zeros(2*size, size-1);
-Jn = zeros(size , 2*size-1);
+Jn = zeros(size-1 , 2*size);
 
 lambda = zeros(size-1, 1);
 
@@ -232,16 +232,6 @@ for t= 2:totalTimeFrames
         
      end
         
-        X_mat(1,t) = X_mat(1,1);
-        Y_mat(1,t) = Y_mat(1,1);
-    
-        VelX_mat(1,t) = 0;
-        VelY_mat(1,t) = 0;
-    
-        force_X(1,t) = 0;
-        force_Y(1,t) = 0;
-    
-    
         for i=1:2*size
             
             for j=1:2*size
@@ -279,11 +269,11 @@ for t = 1: 100: totalTimeFrames
       
      % The final Location can be anything you want
      if count < 10  
-      s = strcat('C:\Users\Lenovo\Downloads\FTL-project-master\Images_FTL_BE\test-00',int2str(count));
+      s = strcat('C:\Users\Lenovo\Downloads\FTL-project-master\Images_CS_BE\test-00',int2str(count));
      elseif count < 100  
-       s = strcat('C:\Users\Lenovo\Downloads\FTL-project-master\Images_FTL_BE\test-0',int2str(count));      
+       s = strcat('C:\Users\Lenovo\Downloads\FTL-project-master\Images_CS_BE\test-0',int2str(count));      
      else   
-         s = strcat('C:\Users\Lenovo\Downloads\FTL-project-master\Images_FTL_BE\test-',int2str(count));        
+         s = strcat('C:\Users\Lenovo\Downloads\FTL-project-master\Images_CS_BE\test-',int2str(count));        
      end
       
        xlim([-11 11]);
