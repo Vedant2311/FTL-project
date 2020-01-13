@@ -38,3 +38,7 @@ Now, since the energy of the old DFTL system is decreasing i.e artificially damp
 This is a basic model with constant parameters. There is no guarantee of the total energy getting conserved, but there is a guarantee of this system performing better than the DFTL for the same set of parameters and a similar computational time (This is because it will only calculate new velocities of the particles in the case of the energy of the system differing a lot from the original energy and that is a very fast step in the DFTL method, as compared to the heavier step of obtaining the new positions). 
 
 It will be interesting to see if this model can guarantee an error bound w.r.t the total energy of the system (if not this model exactly then some modification of it). Also, it is obvious to keep the parameters constant because to keep **variable** parameters, it would require searching and other algorithms for each time step computation to get a closer approximation to the real system and it will get pretty expensive as compared to a single DFTL pass. 
+
+  ### Issues with this method
+  
+  dgdfgdg
