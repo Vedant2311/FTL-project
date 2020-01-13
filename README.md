@@ -49,4 +49,4 @@ So, an interesting scope of improvement for this method is to find out a small r
 
 Also, another important issue with the method of DFTL is that that it saturates to the veloities of all of it's particles to be in the Vertically Downward direction and that makes the Particles move downwards and get corrected by the DFTL method subsequently. And so there is no overall movements of the particles, but their velocities are not correctly updated by the DFTL and so the system will be saturated to a state of the Horizontal velocities to be in the range of **e-14**, whlie the Verticle velocities will be in the order of **10 - 100**. So, the correct update for the DFTL velocities requires a correct selection for the value of *s_damping*
 
-The MATLAB plots for the Energies of the FTL methods and the comparision plot for the DFTL energies are attached in this folder
+The MATLAB plots for the Energies of the FTL methods and the comparision plot for the DFTL energies are attached in this folder (Inaccurate to some extent due to the velocity error in the DFTL method but still can give a general overview of the change of the Energies)
