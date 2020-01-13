@@ -12,6 +12,12 @@ totalTimeFrames = floor(total/delta_time);
 X_mat = zeros(size,totalTimeFrames);
 Y_mat = zeros(size,totalTimeFrames);
 
+Eplot_X = {};
+Eplot_Y = {};
+
+Energy_New = 0;
+Energy_Gravity = 0;
+
 DeltaX_vect = zeros(size+1);
 DeltaY_vect = zeros(size+1);
 
@@ -20,20 +26,24 @@ VelY_mat = zeros(size,totalTimeFrames);
 
 % Initializing the positions
 
-for i=1:size
-           
-    X_mat(i,1) = i-1;
-    Y_mat(i,1) = 0;
-    
-end 
 
 g = 9.81;   %Acceleration due to gravity, modified to fit the ideal assumption
 m =1;       %Mass of the particles
 
 r = 1;      %Initial length between the particles
 
+for i=1:size
+           
+    X_mat(i,1) = (i-1)*r;
+    Y_mat(i,1) = 0;
+    
+end 
+
+
 for t= 2:totalTimeFrames
    
+    Energy_New = 0;
+    
     X_mat(1,t) = X_mat(1,1);
     Y_mat(1,t) = Y_mat(1,1);
     
@@ -74,23 +84,30 @@ for t= 2:totalTimeFrames
         DeltaX_vect(i) = X_mat(i,t) - Xn1;
         DeltaY_vect(i) = Y_mat(i,t) - Yn1;
         
-        
+        Energy_New = Energy_New + m * g * Y_mat(i,t);
+
     end
     
+    Energy_Gravity = Energy_New;
     % Doing the Velocity Correction as mentioned in the paper
     for i=2: size
         
         VelX_mat(i,t) = (X_mat(i,t) - X_mat(i,t-1))/(delta_time) - (s_damp) * (DeltaX_vect(i+1))/(delta_time);
         VelY_mat(i,t) = (Y_mat(i,t) - Y_mat(i,t-1))/(delta_time) - (s_damp) * (DeltaY_vect(i+1))/(delta_time);
+        Energy_New = Energy_New + (1/2) * m * ((VelX_mat(i,t))^2 + (VelY_mat(i,t))^2);
         
     end
+    Eplot_Y = {[cell2mat(Eplot_Y),Energy_New]};
+    Eplot_X = {[cell2mat(Eplot_X),t]};
     
     
 end
 
+figure,plot(cell2mat(Eplot_X),cell2mat(Eplot_Y));
 
 count = 1;
 
+%{
 % Storing the Sampled Images for making the Animation
 for t = 1: 100: totalTimeFrames
     
@@ -114,15 +131,15 @@ for t = 1: 100: totalTimeFrames
       
      % The final location can be anything you want
      if count < 10  
-      s = strcat('C:\Users\Lenovo\Downloads\FTL-project-master\Images_DFTL_Orig\test-00',int2str(count));
+      s = strcat('C:\Users\Lenovo\Downloads\FTL project\Images_DFTL_Orig\test-00',int2str(count));
      elseif count < 100  
-       s = strcat('C:\Users\Lenovo\Downloads\FTL-project-master\Images_DFTL_Orig\test-0',int2str(count));      
+       s = strcat('C:\Users\Lenovo\Downloads\FTL project\Images_DFTL_Orig\test-0',int2str(count));      
      else   
-         s = strcat('C:\Users\Lenovo\Downloads\FTL-project-master\Images_DFTL_Orig\test-',int2str(count));        
+         s = strcat('C:\Users\Lenovo\Downloads\FTL project\Images_DFTL_Orig\test-',int2str(count));        
      end
       
-       xlim([-11 11]);
-       ylim ([-11 1]);    
+       xlim([-r*(size-1) r*(size-1)]);
+       ylim ([-(r * (size-1)) (r*(size-1))/10]);    
        
       saveas(h,s,'jpg');
       close(h);
@@ -131,6 +148,6 @@ for t = 1: 100: totalTimeFrames
 end
 
 
+%}
 
-        
 
