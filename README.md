@@ -39,6 +39,10 @@ This is a basic model with constant parameters. There is no guarantee of the tot
 
 It will be interesting to see if this model can guarantee an error bound w.r.t the total energy of the system (if not this model exactly then some modification of it). Also, it is obvious to keep the parameters constant because to keep **variable** parameters, it would require searching and other algorithms for each time step computation to get a closer approximation to the real system and it will get pretty expensive as compared to a single DFTL pass. 
 
-  ### Issues with this method
+### Issues with this method (and FTL in general)
   
-  dgdfgdg
+The amount of the Artificial damping depends on the Value of *s_damping* set by the user. Now, for the above method, it was an assumption that the DFTL has a nearly Monotonous behavior in terms of it's energy and that will be mainly **decreasing** for the values of *s_damping > 0* and **increasing** for the *s_damping >= 0*
+
+Now, doing extensive experimental analysis for the given problem set, it was obtained that this kind of Energy pattern is not shown in general. And so, this method automatically would fail for more general cases where the User can decide upon any value of *s_damping* and that can result in the system getting sudden Energy Spikes which would result in the output being very unstable. Thus, this method is not bound to work for arbitary choices of *s_damping* and this is a problem for the **DFTL** method as well. Since, changing the value of *s_damping* (Keeping it positive still), the behavior of the output can get very unstable.
+
+So, an interesting scope of improvement for this method is to find out a small range of the *s_damping* which should be set so that the simulations don't get unstable, as a function of the other parameters of the system (Like the **mass of the particles**, **time step**, **rope length** etc) and having obtained such stable regions, work with them to obtain a better solution.
