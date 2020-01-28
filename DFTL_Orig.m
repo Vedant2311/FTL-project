@@ -5,7 +5,7 @@ delta_time = input('Enter your delta T: ');
 total = input('Enter the entire duration of the animation: ');
 
 % The Damping included 
-s_damp = 1;
+s_damp = 0.9;
 
 totalTimeFrames = floor(total/delta_time);
 
@@ -30,7 +30,7 @@ VelY_mat = zeros(size,totalTimeFrames);
 g = 9.81;   %Acceleration due to gravity, modified to fit the ideal assumption
 m =1;       %Mass of the particles
 
-r = 1;      %Initial length between the particles
+r = 0.1;      %Initial length between the particles
 
 for i=1:size
            
@@ -67,19 +67,12 @@ for t= 2:totalTimeFrames
         Xn1 = X_mat(i,t);
         Yn1 = Y_mat(i,t);
       
-        % The position correction steps
-        q = Xn + ((r*(Xn1-Xn))/(sqrt((Xn1 - Xn)^2 + (Yn1 - Yn)^2)));
-        
-        Xn2 = q;
-        Yn2 = Yn + (((Yn1 - Yn)/(Xn1 - Xn))*(q - Xn));
-        
-        if (((Yn2 - Yn1)^2 + (Xn2 - Xn1)^2)>((Xn - Xn1)^2 + (Yn - Yn1)^2))
-            q = -q;
-        end 
-        
-        % Storing the correct positions
-        X_mat(i,t) = q;
-        Y_mat(i,t)= Yn + (((Yn1 - Yn)/(Xn1 - Xn))*(q - Xn));
+        rel_vec = [(Xn1-Xn),(Yn1-Yn)];
+        normVal = norm(rel_vec);
+        rel_vec = rel_vec * r/normVal;
+
+        X_mat(i,t) = Xn + rel_vec(1);
+        Y_mat(i,t)= Yn + rel_vec(2);
         
         DeltaX_vect(i) = X_mat(i,t) - Xn1;
         DeltaY_vect(i) = Y_mat(i,t) - Yn1;
@@ -107,9 +100,9 @@ figure,plot(cell2mat(Eplot_X),cell2mat(Eplot_Y));
 
 count = 1;
 
-%{
+
 % Storing the Sampled Images for making the Animation
-for t = 1: 100: totalTimeFrames
+for t = 1: 4: totalTimeFrames
     
     h = figure('visible','off');
     
@@ -131,11 +124,16 @@ for t = 1: 100: totalTimeFrames
       
      % The final location can be anything you want
      if count < 10  
-      s = strcat('C:\Users\Lenovo\Downloads\FTL project\Images_DFTL_Orig\test-00',int2str(count));
+%      s = strcat('C:\Users\Lenovo\Downloads\FTL project\Images_DFTL_Orig\test-00',int2str(count));
+       s = strcat('/home/vedant/Downloads/FTL-project/Images_DFTL_Orig/test-00',int2str(count));
      elseif count < 100  
-       s = strcat('C:\Users\Lenovo\Downloads\FTL project\Images_DFTL_Orig\test-0',int2str(count));      
+%       s = strcat('C:\Users\Lenovo\Downloads\FTL project\Images_DFTL_Orig\test-0',int2str(count));      
+       s = strcat('/home/vedant/Downloads/FTL-project/Images_DFTL_Orig/test-0',int2str(count));
+
      else   
-         s = strcat('C:\Users\Lenovo\Downloads\FTL project\Images_DFTL_Orig\test-',int2str(count));        
+%         s = strcat('C:\Users\Lenovo\Downloads\FTL project\Images_DFTL_Orig\test-',int2str(count));        
+       s = strcat('/home/vedant/Downloads/FTL-project/Images_DFTL_Orig/test-',int2str(count));
+
      end
       
        xlim([-r*(size-1) r*(size-1)]);
@@ -148,6 +146,6 @@ for t = 1: 100: totalTimeFrames
 end
 
 
-%}
+
 
 
