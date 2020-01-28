@@ -5,7 +5,7 @@ delta_time = input('Enter your delta T: ');
 total = input('Enter the entire duration of the animation: ');
 
 % The Damping included 
-s_damp = 0.9;
+s_damp = 0.8;
 
 totalTimeFrames = floor(total/delta_time);
 
@@ -30,7 +30,7 @@ VelY_mat = zeros(size,totalTimeFrames);
 g = 9.81;   %Acceleration due to gravity, modified to fit the ideal assumption
 m =1;       %Mass of the particles
 
-r = 0.1;      %Initial length between the particles
+r = 1;      %Initial length between the particles
 
 for i=1:size
            
@@ -100,9 +100,9 @@ figure,plot(cell2mat(Eplot_X),cell2mat(Eplot_Y));
 
 count = 1;
 
-
+%{
 % Storing the Sampled Images for making the Animation
-for t = 1: 4: totalTimeFrames
+for t = 1: 1: totalTimeFrames
     
     h = figure('visible','off');
     
@@ -149,3 +149,4 @@ end
 
 
 
+%}
