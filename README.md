@@ -47,6 +47,8 @@ Now, doing extensive experimental analysis for the given problem set, it was obt
 
 Also, it seems from the animation that the system is getting some sudden force of acceleration, which makes it look a little bit unreal. So, because of these issues, just combining some DFTLs is not a good choice since here we are not exactly following the Energy plot for some fixed value of *s_damping*, but we are actually changing from one value to the another, thus making a new DFTL start from an absurd initial configuration, which would never have come on it's plot
 
+Some of the videos of this method have been added to describe it's arbitary shifts from lower energies to higher energies and vice-versa. 
+
 ## Some issues with DFTL
 
 An important issue with the method of DFTL is that that it saturates to the veloities of all of it's particles to be in the Vertically Downward direction and that makes the Particles move downwards and get corrected by the DFTL method subsequently. And so there is no overall movements of the particles, but their velocities are not correctly updated by the DFTL and so the system will be saturated to a state of the Horizontal velocities to be in the range of **e-14**, whlie the Verticle velocities will be in the order of **10 - 100**. So, the correct update for the DFTL velocities requires a correct selection for the value of *s_damping*
