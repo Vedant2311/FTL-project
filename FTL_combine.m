@@ -149,11 +149,16 @@ for t = 1: 1: totalTimeFrames
       
      % The final location can be anything you want
      if count < 10  
-      s = strcat('C:\Users\Lenovo\Downloads\FTL-project-master\Images_FTL_new\test-00',int2str(count));
+%      s = strcat('C:\Users\Lenovo\Downloads\FTL project\Images_DFTL_Combine\test-00',int2str(count));
+       s = strcat('/home/vedant/Downloads/FTL-project/Images_DFTL_Combine/test-00',int2str(count));
      elseif count < 100  
-       s = strcat('C:\Users\Lenovo\Downloads\FTL-project-master\Images_FTL_new\test-0',int2str(count));      
+%       s = strcat('C:\Users\Lenovo\Downloads\FTL project\Images_DFTL_Combine\test-0',int2str(count));      
+       s = strcat('/home/vedant/Downloads/FTL-project/Images_DFTL_Combine/test-0',int2str(count));
+
      else   
-         s = strcat('C:\Users\Lenovo\Downloads\FTL-project-master\Images_FTL_new\test-',int2str(count));        
+%         s = strcat('C:\Users\Lenovo\Downloads\FTL project\Images_DFTL_Combine\test-',int2str(count));        
+       s = strcat('/home/vedant/Downloads/FTL-project/Images_DFTL_Combine/test-',int2str(count));
+
      end
       
        xlim([-11 11]);
@@ -168,4 +173,3 @@ end
 
 
         
-
