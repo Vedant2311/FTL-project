@@ -23,13 +23,13 @@ All the codes are built on the same situation of an inextensible thread, assumed
 
 5. **DFTL_Orig.m**: The System is implemented by the Dynamic Follow the Leader Method, as mentioned in the Matthias paper
 
-6. **FTL_new.m**: The new implementation for the DFTL having the property of energy conservation as well
+6. **FTL_combine.m**: The new implementation for the DFTL having the property of energy conservation as well, by combining two different DFTLS and a FTL
 
 ## About the Videos
 
 All the outputs are given on the situation of a thread of length 10m, consisting of 11 particles, with the mass of each particle being 1 Kg. The gravity constant is taken as 9.8 m/s2. The Spring constant is 1000 SI units and the damping constant is 5 SI units. Also, the time step is 0.05s and the total time for the algorithm to run is 10 seconds. The names of the videos correspond to their respective algorithms. Also, the Default frame rate corresponds to 100 images per frame
 
-## About the new method 
+## About the Combine method 
 
 Since it was proved by us that the DFTL method actually converges to the true solution in the limit of the time step tending to 0, irrespective of the value of *s_damping* (this can be assumed by the reader for now), so any linear combination of these methods will also converge to the physical solution in the zero limits.
 
@@ -49,4 +49,8 @@ So, an interesting scope of improvement for this method is to find out a small r
 
 Also, another important issue with the method of DFTL is that that it saturates to the veloities of all of it's particles to be in the Vertically Downward direction and that makes the Particles move downwards and get corrected by the DFTL method subsequently. And so there is no overall movements of the particles, but their velocities are not correctly updated by the DFTL and so the system will be saturated to a state of the Horizontal velocities to be in the range of **e-14**, whlie the Verticle velocities will be in the order of **10 - 100**. So, the correct update for the DFTL velocities requires a correct selection for the value of *s_damping*
 
-The MATLAB plots for the Energies of the FTL methods and the comparision plot for the DFTL energies are attached in this folder (Inaccurate to some extent due to the velocity error in the DFTL method but still can give a general overview of the change of the Energies). Also a sample excel file for the velocities of the particles during the course of the simulation has also been included in the folder. You can have a look at it's final values to see how the Y-component of the velocities of the particles never attains a 0 value. The corresponding energy plot is also included.
+The MATLAB plots for the Energies of the FTL methods and the comparision plot for the DFTL energies are attached in this folder (Inaccurate to some extent due to the velocity error in the DFTL method but still can give a general overview of the change of the Energies). Also a sample excel file for the velocities of the particles during the course of the simulation has also been included in the folder. You can have a look at it's final values to see how the Y-component of the velocities of the particles never attains a 0 value. The corresponding energy plot is also included. But also, it we keep the value of *s_damping* to be very small, then during convergence, this vertical component of velocities of the particles tends to zero during the steady state
+
+Thus, there is a tradeoff now. Either take the value of **s_damping -> 1** and get a stable behavior (But with large damping and an inaccurate calculation of velocity) OR take the value of **s_damping -> 0** and get a nearly unstable behavior (But with an accurate calculation of the velocities i.e. all the components of the particle velocities will tend to 0 during the steady-state as expected)
+
+
