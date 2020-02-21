@@ -31,6 +31,8 @@ All the codes are built on the same situation of an inextensible thread, assumed
 
 8. **FTL_combine.m**: The new implementation for the DFTL having the property of energy conservation as well, by combining two different DFTLS and a FTL
 
+9. **FTL_Quad_Combine.m**: A combination of the position correction as well as the Velocity correction, with continuously varying parameters for both of them
+
 ## About the Videos
 
 All the outputs are given on the situation of a thread of length 10m, consisting of 11 particles, with the mass of each particle being 1 Kg. The gravity constant is taken as 9.8 m/s2. The Spring constant is 1000 SI units and the damping constant is 5 SI units. Also, the time step is 0.05s and the total time for the algorithm to run is 8 or 10 seconds. The names of the videos correspond to their respective algorithms. Also, the Default frame rate corresponds to 100 images per frame
@@ -105,3 +107,11 @@ Thus, this method could act as a good theoretical improvement over DFTL, just th
   - Does **NOT** have a proper monotonous Energy curve
   - Has lesser damping than DFTL, but it **may** get unstable in some circumstances because of the unpredictable nature of the DFTL plots
   - The method seems unnatural because of the sudden bursts of Energies involved
+  
+### DFTL_Quad_Combine
+
+  - The proof for the correctness of this algorithm will be pretty involved in it's general case and so that will need a better mathematical demonstration for it's correctness, a part we are leaving as of now
+  - Achieves a proper steady state velocity
+  - Does **NOT** follow a monotonous Energy curve and shows a peak in the Energy curve in th beginning
+  - More stable and Damped than DFTL (In the physically relevant implementations)
+  - The method looks Natural and behaves much like the DFTL method
