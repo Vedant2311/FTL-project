@@ -31,6 +31,8 @@ All the codes are built on the same situation of an inextensible thread, assumed
 
 8. **FTL_Mem.m**: Rather than adding the correction to the velocties, the positions of the particles are updated to account for the issue of the unequal mass distribution
 
+9. **comp.m**: Just to make some plots and other debugging purposes
+
 ## About the Videos
 
 All the outputs are given on the situation of a thread of length 10m, consisting of 11 particles, with the mass of each particle being 1 Kg. The gravity constant is taken as 9.8 m/s2. The Spring constant is 1000 SI units and the damping constant is 5 SI units. Also, the time step is 0.05s and the total time for the algorithm to run is 8 or 10 seconds. The names of the videos correspond to their respective algorithms. Also, the Default frame rate corresponds to 100 images per frame
@@ -73,7 +75,7 @@ Thus, there is a tradeoff for the DFTL now. Either take the value of **s_damping
 
 ## About the Quad Method
 
-The DFTL having improper steady state velocities is a very big issue indeed. But, there was also an observation that this method actually converges to the proper values of the velocities if the values of *s_damping* is tending to zero. So, here rather than having a fixed *s_damping*, it is implemented as a function which is going from 0.8 to 0.1 in a continuous manner, thus increasing the energy in the later stages appropriately as well has having the direction and value of the velocities of the particles to be physically consistent. The plots and videos for this method as included with their corresponding name. Also, this method seems to have a better performance than the typical DFTL method, though with an assumption that the total time for the Animation is not much more than the time taken for the system to reach the steady state, else the improvement won't be that significantly observable
+The DFTL having improper steady state velocities is a very big issue indeed. But, there was also an observation that this method actually converges to the proper values of the velocities if the values of *s_damping* is tending to zero. So, here rather than having a fixed *s_damping*, it is implemented as a function which is going from 0.8 to 0.1 in a continuous manner, thus increasing the energy in the later stages appropriately as well has having the direction and value of the velocities of the particles to be physically consistent. The plots and videos for this method as included with their corresponding name. Also, this method seems to have a better performance than the typical DFTL method, though with an assumption that the total time for the Animation is not much more than the time taken for the system to reach the steady state, else the improvement won't be that significantly observable. A comparision for the trace obtained for this method and the trace corresponding to the DFTL with the string of mass 500 grams and length 50 cm is attached in the corresponding folder
 
 ## About the Mem Method
 
