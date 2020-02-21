@@ -27,7 +27,7 @@ All the codes are built on the same situation of an inextensible thread, assumed
 
 6. **DFTL_Quad_S.m**: The new implementation has the *s_damping* value varying as a function to ensure that it is closer to 0 during the steady state. To solve the velocity issue of the ordinary DFTL. Also has an improved performance
 
-7. **FTL_Mem.m**: Rather than adding the correction to the velocties, the positions of the particles are updated to account for the issue of the unequal mass distribution
+7. **FTL_Mem.m**: Rather than adding the correction to the velocties, the positions of the particles are updated to account for the issue of the uneven mass distribution
 
 8. **FTL_combine.m**: The new implementation for the DFTL having the property of energy conservation as well, by combining two different DFTLS and a FTL
 
