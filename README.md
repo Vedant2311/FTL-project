@@ -37,45 +37,13 @@ All the codes are built on the same situation of an inextensible thread, assumed
 
 All the outputs are given on the situation of a thread of length 10m, consisting of 11 particles, with the mass of each particle being 1 Kg. The gravity constant is taken as 9.8 m/s2. The Spring constant is 1000 SI units and the damping constant is 5 SI units. Also, the time step is 0.05s and the total time for the algorithm to run is 8 or 10 seconds. The names of the videos correspond to their respective algorithms. Also, the Default frame rate corresponds to 100 images per frame
 
-## About the Combine method 
-
-Since it was proved by us that the DFTL method actually converges to the true solution in the limit of the time step tending to 0, irrespective of the value of *s_damping* (this can be assumed by the reader for now), so any linear combination of these methods will also converge to the physical solution in the zero limits.
-
-Now, since the energy of the old DFTL system is decreasing i.e artificially damping, so to prevent that it was tried that if the energy of the system decreases below a fixed threshold value, then the velocities of the system are updated by a FTL method (i.e a DFTL with *s_damping* =0). But then it can happen that the energy of the system would just shoot up, resulting in a very unstable update and that would keep on propagating in the further time steps. So for this issue, an other DFTL was added which would be **more damped** than the original DFTL and thus such unstable spikes would get prevented
-
-This is a basic model with constant parameters. There is no guarantee of the total energy getting conserved, but there is a guarantee of this system performing better than the DFTL for the same set of parameters and a similar computational time (This is because it will only calculate new velocities of the particles in the case of the energy of the system differing a lot from the original energy and that is a very fast step in the DFTL method, as compared to the heavier step of obtaining the new positions). 
-
-It will be interesting to see if this model can guarantee an error bound w.r.t the total energy of the system (if not this model exactly then some modification of it). Also, it is obvious to keep the parameters constant because to keep **variable** parameters, it would require searching and other algorithms for each time step computation to get a closer approximation to the real system and it will get pretty expensive as compared to a single DFTL pass. 
-
-### Issues with this method
-  
-The amount of the Artificial damping depends on the Value of *s_damping* set by the user. Now, for the above method, it was an assumption that the DFTL has a nearly Monotonous behavior in terms of it's energy and that will be mainly **decreasing** for the values of *s_damping > 0* and **increasing** for the *s_damping >= 0*
-
-Now, doing extensive experimental analysis for the given problem set, it was obtained that this kind of Energy pattern is not shown in general. And so, this method automatically would fail for more general cases where the User can decide upon any value of *s_damping* and that can result in the system getting sudden Energy Spikes which would result in the output being very unstable. Thus, this method is not bound to work for arbitary choices of *s_damping* and this is a problem for the **DFTL** method as well. Since, changing the value of *s_damping* (Keeping it positive still), the behavior of the output can get very unstable
-
-Also, it seems from the animation that the system is getting some sudden force of acceleration, which makes it look a little bit unreal. So, because of these issues, just combining some DFTLs is not a good choice since here we are not exactly following the Energy plot for some fixed value of *s_damping*, but we are actually changing from one value to the another, thus making a new DFTL start from an absurd initial configuration, which would never have come on it's plot
-
-Some of the videos of this method have been added to describe it's arbitary shifts from lower energies to higher energies and vice-versa. 
-
-<!---
-## Some issues with DFTL
---->
-
-<!---
-An important issue with the method of DFTL is that that it saturates to the veloities of all of it's particles to be in the Vertically Downward direction and that makes the Particles move downwards and get corrected by the DFTL method subsequently. And so there is no overall movements of the particles, but their velocities are not correctly updated by the DFTL and so the system will be saturated to a state of the Horizontal velocities to be in the range of **e-14**, whlie the Verticle velocities will be in the order of **10 - 100**. So, the correct update for the DFTL velocities requires a correct selection for the value of *s_damping*
---->
-
-<!---
-The MATLAB plots for the Energies of the FTL methods and the comparision plot for the DFTL energies are attached in this folder (Inaccurate to some extent due to the velocity error in the DFTL method but still can give a general overview of the change of the Energies). Also a sample excel file for the velocities of the particles during the course of the simulation has also been included in the folder. You can have a look at it's final values to see how the Y-component of the velocities of the particles never attains a 0 value. The corresponding energy plot is also included. But also, it we keep the value of *s_damping* to be very small, then during convergence, this vertical component of velocities of the particles tends to zero during the steady state
---->
-
-<!---
-Thus, there is a tradeoff for the DFTL now. Either take the value of **s_damping -> 1** and get a stable behavior (But with large damping and an inaccurate calculation of velocity) OR take the value of **s_damping -> 0** and get a nearly unstable behavior (But with an accurate calculation of the velocities i.e. all the components of the particle velocities will tend to 0 during the steady-state as expected)
---->
-
 ## About the Quad Method
 
-The DFTL having improper steady state velocities is a very big issue indeed. But, there was also an observation that this method actually converges to the proper values of the velocities if the values of *s_damping* is tending to zero. So, here rather than having a fixed *s_damping*, it is implemented as a function which is going from 0.8 to 0.1 in a continuous manner, thus increasing the energy in the later stages appropriately as well has having the direction and value of the velocities of the particles to be physically consistent. The plots and videos for this method as included with their corresponding name. Also, this method seems to have a better performance than the typical DFTL method, though with an assumption that the total time for the Animation is not much more than the time taken for the system to reach the steady state, else the improvement won't be that significantly observable. A comparision for the trace obtained for this method and the trace corresponding to the DFTL with the string of mass 500 grams and length 50 cm is attached in the corresponding folder
+The DFTL having improper steady state velocities is a very big issue indeed. But, there was also an observation that this method actually converges to the proper values of the velocities if the values of *s_damping* is tending to zero. So, here rather than having a fixed *s_damping*, it is implemented as a function which is going from 0.8 to 0.1 in a continuous manner, thus increasing the energy in the later stages appropriately as well has having the direction and value of the velocities of the particles to be physically consistent. 
+
+The plots and videos for this method as included with their corresponding name. Also, this method seems to have a better performance than the typical DFTL method, though with an assumption that the total time for the Animation is not much more than the time taken for the system to reach the steady state, else the improvement won't be that significantly observable. A comparision for the trace obtained for this method and the trace corresponding to the DFTL with the string of mass 500 grams and length 50 cm is attached in the corresponding folder
+
+Thus, inspite of the unpredictable energy pattern of the DFTL method, since the lower values of *s_damping* are very unstable, we can say that this method will in-general behave better than the DFTL method. Also, it is trivial to say that it will behave **at most** as damped as the original DFTL method. Also, by a thorough experimental analysis, it was found that this method shows a nearly monotnous energy trend, despite of the uneven energy trends in the individual DFTL simulations
 
 ## About the Mem Method
 
@@ -84,6 +52,18 @@ Rather than considering the changes in the positions of the other particles and 
 Note that, this method has the benefit of adding the correction for the uneven mass distribution **prior** to the actual FTL correction step, rather than account for the uneven mass distribution **after** the actual FTL correction step. This has a direct benefit of reporting proper velocities and showing a correct monotonously decreasing energy plot as expected. Also to avoid for the damping, a parameter of *s_damping* is introduced in this method, which is the same as the one in the DFTL method (With the values again being in the range of **0-1**)
 
 An important observation for this method is that it seems to be more damped than the DFTL method, with one reason being the initial increase of Energy in the DFTL plots, which is not seen in the case of this method. Comparision videos are included in the corresponding folder
+
+## Some failed approaches
+
+While trying to find an improvement for the not-so-trivial method, various methods were employed and experimented in the high time step setting, and subsequently compared with the DFTL method. Some of the prominent methods developed during this process are as follows:
+
+### Combine Method
+
+Since it was proved by us that the DFTL method actually converges to the true solution in the limit of the time step tending to 0, irrespective of the value of *s_damping* (this can be assumed by the reader for now), so any linear combination of these methods will also converge to the physical solution in the zero limits.
+
+Now, if we assume that the energy of the original DFTL system is decreasing monotonously, then to prevent that it was tried that if the energy of the system decreases below a fixed threshold value, then the velocities of the system are updated by a FTL method (i.e a DFTL with *s_damping* =0). But then it can happen that the energy of the system would just shoot up, resulting in a very unstable update and that would keep on propagating in the further time steps. So for this issue, an other DFTL was added which would be more damped than the original DFTL and thus such unstable spikes would get prevented. As it can be seen, the computational requirements for this method will nearly be the same for the Original DFTL method
+
+Now, it was very trivial to assume that the positive values of *s_damping* will mean a system with monotonously decreasing energy, and monotonously increasing for negative values. Indeed, it was found that the system follows a very vague energy curve (even for the case when *s_damping* equals 1, which was posed in the paper as the theoretical solution for the uneven mass distribution). So, the behavior of the system becomes very unstable and there won't be any guarantee that the system will indeed behave the way we want it to be. Also, because of the sudden shifts in the *s_damping* value, the system seems to be behaving in an unnatural manner.
 
 ## Summary of all the different improvements over DFTL
 
