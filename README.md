@@ -73,7 +73,7 @@ Thus, there is a tradeoff for the DFTL now. Either take the value of **s_damping
 
 ## About the Quad Method
 
-The DFTL having improper steady state velocities is a very big issue indeed. But, there was also an observation that this method actually converges to the proper values of the velocities if the values of *s_damping* is tending to zero. So, here rather than having a fixed *s_damping*, it is implemented as a function which is going from 0.8 to 0.1 in a continuous manner, thus increasing the energy in the later stages appropriately as well has having the direction and value of the velocities of the particles to be physically consistent. The plots and videos for this method as included with their corresponding name. Also, this method seems to have a better performance than the typical DFTL method, though the improvement is typically observed with large parameter values, and not with the smaller ones and that's an issue indeed!
+The DFTL having improper steady state velocities is a very big issue indeed. But, there was also an observation that this method actually converges to the proper values of the velocities if the values of *s_damping* is tending to zero. So, here rather than having a fixed *s_damping*, it is implemented as a function which is going from 0.8 to 0.1 in a continuous manner, thus increasing the energy in the later stages appropriately as well has having the direction and value of the velocities of the particles to be physically consistent. The plots and videos for this method as included with their corresponding name. Also, this method seems to have a better performance than the typical DFTL method
 
 ## About the Mem Method
 
