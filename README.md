@@ -90,5 +90,21 @@ An important observation for this method is that it seems to be more damped than
   - Follows the same proof of correctness as the one for the DFTL method
   - Achieves a proper steady state velocity because of *s_damping* tending to 0 in the last time frames
   - Does **NOT** have a proper monotonus Energy curve, since it's basically derived from the DFTL
-  - Has lesser damping than the DFTL, without getting unstable
+  - Has lesser damping than the DFTL, without getting unstable. 
+  - The method looks natural because of continuous varations in the *s_damping*
   
+### FTL_Mem
+
+  - Follows the same proof of correctness as the one for the DFTL method
+  - Achieves a proper steady state velocity, because of the **prior** corrections 
+  - Monotonously decreases energy for *s_damping*=1. Does not have for lower values of it, since the method then tends to be behaving like the typical FTL
+  - More stable and damped than DFTL
+  - The method looks natural and behaves much like the DFTL method, but achieves a good theoretical improvement over it
+  
+### FTL_Combine
+
+  - Follows the same proof of correctness as the one for the DFTL method
+  - Does **NOT** achieve a proper steady state velocity
+  - Does **NOT** have a proper monotonous Energy curve
+  - Has lesser damping than DFTL, but it **may** get unstable in some circumstances because of the unpredictable nature of the DFTL plots
+  - The method seems unnatural because of the sudden bursts of Energies involved
