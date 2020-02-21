@@ -89,7 +89,7 @@ An important observation for this method is that it seems to be more damped than
 
   - Follows the same proof of correctness as the one for the DFTL method
   - Achieves a proper steady state velocity because of *s_damping* tending to 0 in the last time frames
-  - Does **NOT** have a proper monotonus Energy curve, since it's basically derived from the DFTL
+  - Gets a **nearly** monotonus energy curve most of the times, as observed experimentally
   - Has lesser damping than the DFTL, without getting unstable. 
   - The method looks natural because of continuous varations in the *s_damping*
   
