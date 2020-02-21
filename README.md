@@ -28,6 +28,8 @@ All the codes are built on the same situation of an inextensible thread, assumed
 
 7. **DFTL_Quad_S.m**: The new implementation has the *s_damping* value varying as a function to ensure that it is closer to 0 during the steady state. To solve the velocity issue of the ordinary DFTL. Also has an improved performance
 
+8. **FTL_Mem.m**: Rather than adding the correction to the velocties, the positions of the particles are updated to account for the issue of the unequal mass distribution
+
 ## About the Videos
 
 All the outputs are given on the situation of a thread of length 10m, consisting of 11 particles, with the mass of each particle being 1 Kg. The gravity constant is taken as 9.8 m/s2. The Spring constant is 1000 SI units and the damping constant is 5 SI units. Also, the time step is 0.05s and the total time for the algorithm to run is 8 or 10 seconds. The names of the videos correspond to their respective algorithms. Also, the Default frame rate corresponds to 100 images per frame
