@@ -25,11 +25,11 @@ All the codes are built on the same situation of an inextensible thread, assumed
 
 5. **DFTL_Orig.m**: The System is implemented by the Dynamic Follow the Leader Method, as mentioned in the Matthias paper
 
-6. **FTL_combine.m**: The new implementation for the DFTL having the property of energy conservation as well, by combining two different DFTLS and a FTL
+6. **DFTL_Quad_S.m**: The new implementation has the *s_damping* value varying as a function to ensure that it is closer to 0 during the steady state. To solve the velocity issue of the ordinary DFTL. Also has an improved performance
 
-7. **DFTL_Quad_S.m**: The new implementation has the *s_damping* value varying as a function to ensure that it is closer to 0 during the steady state. To solve the velocity issue of the ordinary DFTL. Also has an improved performance
+7. **FTL_Mem.m**: Rather than adding the correction to the velocties, the positions of the particles are updated to account for the issue of the unequal mass distribution
 
-8. **FTL_Mem.m**: Rather than adding the correction to the velocties, the positions of the particles are updated to account for the issue of the unequal mass distribution
+8. **FTL_combine.m**: The new implementation for the DFTL having the property of energy conservation as well, by combining two different DFTLS and a FTL
 
 ## About the Videos
 
@@ -53,7 +53,7 @@ An important observation for this method is that it seems to be more damped than
 
 ## Some failed approaches
 
-While trying to find an improvement for the not-so-trivial method, various methods were employed and experimented in the high time step setting, and subsequently compared with the DFTL method. Some of the prominent methods developed during this process are as follows:
+While trying to find an improvement for the not-so-trivial method, various methods were employed and experimented in the high time step setting, and subsequently compared with the DFTL method. A big hindrance while trying to find any improvements ober this method is the fact that this method is very fast and seems to be performing the minimum computations. Some of the prominent methods developed during this process are as follows:
 
 ### Combine Method
 
@@ -61,9 +61,26 @@ Since it was proved by us that the DFTL method actually converges to the true so
 
 Now, if we assume that the energy of the original DFTL system is decreasing monotonously, then to prevent that it was tried that if the energy of the system decreases below a fixed threshold value, then the velocities of the system are updated by a FTL method (i.e a DFTL with *s_damping* =0). But then it can happen that the energy of the system would just shoot up, resulting in a very unstable update and that would keep on propagating in the further time steps. So for this issue, an other DFTL was added which would be more damped than the original DFTL and thus such unstable spikes would get prevented. As it can be seen, the computational requirements for this method will nearly be the same for the Original DFTL method
 
-Now, it was very trivial to assume that the positive values of *s_damping* will mean a system with monotonously decreasing energy, and monotonously increasing for negative values. Indeed, it was found that the system follows a very vague energy curve (even for the case when *s_damping* equals 1, which was posed in the paper as the theoretical solution for the uneven mass distribution). So, the behavior of the system becomes very unstable and there won't be any guarantee that the system will indeed behave the way we want it to be. Also, because of the sudden shifts in the *s_damping* value, the system seems to be behaving in an unnatural manner.
+Now, it was very trivial to assume that the positive values of *s_damping* will mean a system with monotonously decreasing energy, and monotonously increasing for negative values. Indeed, it was found that the system follows a very vague energy curve (even for the case when *s_damping* equals 1, which was posed in the paper as the theoretical solution for the uneven mass distribution). So, the behavior of the system becomes very unstable and there won't be any guarantee that the system will indeed behave the way we want it to be. Also, because of the sudden shifts in the *s_damping* value, the system seems to be behaving in an unnatural manner
 
-## Summary of all the different improvements over DFTL
+### Quad Combine method
+
+Just like in the **DFTL_Quad** method, the value of *s_damping* is kept to be changing monotonously, it was tried to apply the same principle to the **FTL_Mem** method, where a similar *s_damping* is used, as the multiplying factor for the correction term involved corresponding to the positions of the particles. It was also considered having the velocity correction term as well and varying it's *s_damping* as well
+
+If we refer to the *s_damping* for the positions and velocites as *s_p* and *s_v* respectively, then the following major observations were obtained
+
+  - On decreasing only the *s_v*, having *s_p* as 0 gives the **DFTL_Quad** method
+  - On decreasing only the *s_p*, having *s_v* as 0 gives the system which has better performance than **FTL_Mem**, but is still more damped than the DFTL result
+  - On decreasing both the *s_v* and *s_p* makes the system much more damped and this has no physical significance either
+  - On increasing one and decreasing the other while having their sum to be a constant, simulates a behavior much similar to the one obtained from the DFTL with *s_damping* as the same constant 
+
+Thus, this method could act as a good theoretical improvement over DFTL, just that it will be **at least** as damped as the DFTL method. Also, an other important observation regarding this method was that that the energy plots for the physically feasible implementations of this method were not monotonically decreasing. Rather, they were having a significant increase in the energy in the beginning of the simulation (This jump was kind of negligible for the **DFTL_Quad** method)
+
+### Other methods which will not work for this problem
+
+  - Blending FTL and DFTL (*s_damping* = 1) with varying weights such that the total energy of the system nearly remains constant. This method will have an overhead of finding the weights, thus making the computation much slower
+
+## Summary of all the major methods discussed here
 
 ### DFTL_Quad
 
