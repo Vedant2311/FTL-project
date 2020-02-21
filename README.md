@@ -4,8 +4,9 @@ Simulating hair and fur is very common in the field of Computer Graphics. One of
 
 A method for solving this problem of Zero-stretch for dynamic simulations based on the FTL method has been presented as *Dynamic Follow the Leader (DFTL)* (https://matthias-research.github.io/pages/publications/FTLHairFur.pdf). The main issues with the method given in that paper are as follows:
 
-  - It has a lot of artificial damping
   - No proof of correctness was given for this method
+  - The velocity correction term actually gives an improper steady state velocity
+  - A lot of Artificial damping
   
 This work deals with tackling with these problems to improve the DFTL give an algorithm which solves the zero extension problem, is physically accurate (in the limits of the step size time tending to zero) and does not have such high artificial damping
 
@@ -51,15 +52,25 @@ Also, it seems from the animation that the system is getting some sudden force o
 
 Some of the videos of this method have been added to describe it's arbitary shifts from lower energies to higher energies and vice-versa. 
 
+<!---
 ## Some issues with DFTL
+--->
 
+<!---
 An important issue with the method of DFTL is that that it saturates to the veloities of all of it's particles to be in the Vertically Downward direction and that makes the Particles move downwards and get corrected by the DFTL method subsequently. And so there is no overall movements of the particles, but their velocities are not correctly updated by the DFTL and so the system will be saturated to a state of the Horizontal velocities to be in the range of **e-14**, whlie the Verticle velocities will be in the order of **10 - 100**. So, the correct update for the DFTL velocities requires a correct selection for the value of *s_damping*
+--->
 
+<!---
 The MATLAB plots for the Energies of the FTL methods and the comparision plot for the DFTL energies are attached in this folder (Inaccurate to some extent due to the velocity error in the DFTL method but still can give a general overview of the change of the Energies). Also a sample excel file for the velocities of the particles during the course of the simulation has also been included in the folder. You can have a look at it's final values to see how the Y-component of the velocities of the particles never attains a 0 value. The corresponding energy plot is also included. But also, it we keep the value of *s_damping* to be very small, then during convergence, this vertical component of velocities of the particles tends to zero during the steady state
+--->
 
+<!---
 Thus, there is a tradeoff for the DFTL now. Either take the value of **s_damping -> 1** and get a stable behavior (But with large damping and an inaccurate calculation of velocity) OR take the value of **s_damping -> 0** and get a nearly unstable behavior (But with an accurate calculation of the velocities i.e. all the components of the particle velocities will tend to 0 during the steady-state as expected)
+--->
 
 ## About the Quad Method
 
-As discussed in the previous section, the DFTL not actually converging to the correct values of the valocities of the particles is indeed a very important issue and it actually degrades this method as a whole. But, there was also an observation that this method actually converges to the proper values of the velocities if the values of *s_damping* is tending to zero. So, here rather than having a fixed *s_damping*, it is implemented as a function which is going from 0.8 to 0.1 in a continuous manner, thus increasing the energy in the later stages appropriately as well has having the direction and value of the velocities of the particles to be physically consistent. The plots and videos for this method as included with their corresponding name
+The DFTL having improper steady state velocities is a very big issue indeed. But, there was also an observation that this method actually converges to the proper values of the velocities if the values of *s_damping* is tending to zero. So, here rather than having a fixed *s_damping*, it is implemented as a function which is going from 0.8 to 0.1 in a continuous manner, thus increasing the energy in the later stages appropriately as well has having the direction and value of the velocities of the particles to be physically consistent. The plots and videos for this method as included with their corresponding name. Also, this method seems to have a better performance than the typical DFTL method, though the improvement is typically observed with large parameter values, and not with the smaller ones and that's an issue indeed!
+
+
 
