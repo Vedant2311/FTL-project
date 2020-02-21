@@ -6,6 +6,7 @@ A method for solving this problem of Zero-stretch for dynamic simulations based 
 
   - No proof of correctness was given for this method
   - The velocity correction term actually gives an improper steady state velocity
+  - An improper Energy curve
   - A lot of Artificial damping
   
 This work deals with tackling with these problems to improve the DFTL give an algorithm which solves the zero extension problem, is physically accurate (in the limits of the step size time tending to zero) and does not have such high artificial damping
