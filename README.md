@@ -83,5 +83,12 @@ Note that, this method has the benefit of adding the correction for the uneven m
 
 An important observation for this method is that it seems to be more damped than the DFTL method, with one reason being the initial increase of Energy in the DFTL plots, which is not seen in the case of this method. Comparision videos are included in the corresponding folder
 
+## Summary of all the different improvements over DFTL
 
+### DFTL_Quad
 
+  - Follows the same proof of correctness as the one for the DFTL method
+  - Achieves a proper steady state velocity because of *s_damping* tending to 0 in the last time frames
+  - Does **NOT** have a proper monotonus Energy curve, since it's basically derived from the DFTL
+  - Has lesser damping than the DFTL, without getting unstable
+  
