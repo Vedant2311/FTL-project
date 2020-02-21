@@ -74,5 +74,13 @@ Thus, there is a tradeoff for the DFTL now. Either take the value of **s_damping
 
 The DFTL having improper steady state velocities is a very big issue indeed. But, there was also an observation that this method actually converges to the proper values of the velocities if the values of *s_damping* is tending to zero. So, here rather than having a fixed *s_damping*, it is implemented as a function which is going from 0.8 to 0.1 in a continuous manner, thus increasing the energy in the later stages appropriately as well has having the direction and value of the velocities of the particles to be physically consistent. The plots and videos for this method as included with their corresponding name. Also, this method seems to have a better performance than the typical DFTL method, though the improvement is typically observed with large parameter values, and not with the smaller ones and that's an issue indeed!
 
+## About the Mem Method
+
+Rather than considering the changes in the positions of the other particles and incorporating them in the velocities of each particle, an other approach would be to do the same correction thing, but this time for the PBD positions of each particles. So here, the changes in the positions of the particles during the most recent correction step would be stored (i.e. in the **n-1**th time instant) and these will be used to obtain the **p_n** terms for each particles (i.e. the positions before the correction step)
+
+Note that, this method has the benefit of adding the correction for the uneven mass distribution **prior** to the actual FTL correction step, rather than account for the uneven mass distribution **after** the actual FTL correction step. This has a direct benefit of reporting proper velocities and showing a correct monotonously decreasing energy plot as expected. Also to avoid for the damping, a parameter of *s_damping* is introduced in this method, which is the same as the one in the DFTL method (With the values again being in the range of **0-1**)
+
+An important observation for this method is that it seems to be more damped than the DFTL method, with one reason being the initial increase of Energy in the DFTL plots, which is not seen in the case of this method. Comparision videos are included in the corresponding folder
+
 
 
