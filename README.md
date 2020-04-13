@@ -75,10 +75,11 @@ Thus, this method could act as a good theoretical improvement over DFTL, just th
 
   - Blending FTL and DFTL (*s_damping* = 1) with varying weights such that the total energy of the system nearly remains constant. This method will have an overhead of finding the weights, thus making the computation much slower
 
-## Summary of all the major methods discussed here
+## Summary of all the new algorithms for FTL
 
 ### DFTL_Quad
 
+  - In the update rule of     h<sub>&theta;</sub>(x) = &theta;<sub>o</sub> x + &theta;<sub>1</sub>x
   - Follows the same proof of correctness as the one for the DFTL method
   - Achieves a proper steady state velocity because of *s_damping* tending to 0 in the last time frames
   - Gets a **nearly** monotonus energy curve most of the times, as observed experimentally
