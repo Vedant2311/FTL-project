@@ -11,7 +11,7 @@ A method for solving this problem of Zero-stretch for dynamic simulations based 
   
 This work deals with tackling with these problems to improve the DFTL give an algorithm which solves the zero extension problem, is physically accurate (in the limits of the step size time tending to zero) and does not have such high artificial damping
 
-New Approach: Stabilizing Integrators using https://www.cs.utah.edu/~ladislav/dinev18stabilizing/dinev18stabilizing.html
+New Approach: Stabilizing Integrators using 
 
 ## About the codes
 
@@ -42,10 +42,6 @@ If we refer to the *s_damping* for the positions and velocites as *s_p* and *s_v
   - On increasing one and decreasing the other while having their sum to be a constant, simulates a behavior much similar to the one obtained from the DFTL with *s_damping* as the same constant 
 
 Thus, this method could act as a good theoretical improvement over DFTL, just that it will be **at least** as damped as the DFTL method. Also, an other important observation regarding this method was that that the energy plots for the physically feasible implementations of this method were not monotonically decreasing. Rather, they were having a significant increase in the energy in the beginning of the simulation (This jump was kind of negligible for the **DFTL_Quad** method)
-
-### Other methods which will not work for this problem
-
-  - Blending FTL and DFTL (*s_damping* = 1) with varying weights such that the total energy of the system nearly remains constant. This method will have an overhead of finding the weights, thus making the computation much slower
 
 ## Summary of all the new algorithms for FTL
 
@@ -85,3 +81,7 @@ Thus, this method could act as a good theoretical improvement over DFTL, just th
   - Does **NOT** follow a monotonous Energy curve and shows a peak in the Energy curve in th beginning
   - More stable and Damped than DFTL (In the physically relevant implementations)
   - The method looks Natural and behaves much like the DFTL method
+
+### DFTL_Blend
+  
+  - Blending two different DFTLs with s_damping=0 and s_damping=1 respectively, as per applying binary search on a parameter &alpha; as described in https://www.cs.utah.edu/~ladislav/dinev18stabilizing/dinev18stabilizing.html
