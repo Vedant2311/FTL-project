@@ -13,7 +13,6 @@ VelX_mat = zeros(size,totalTimeFrames);
 VelY_mat = zeros(size,totalTimeFrames);
 
 % Initializing the positions
-
 for i=1:size
            
     X_mat(i,1) = i-1;
