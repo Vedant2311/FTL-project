@@ -1,0 +1,1 @@
+All the videos and plots for comparing the simulations of DFTL_Orig and DFTL_Quad can be found here
