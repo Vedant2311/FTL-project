@@ -35,7 +35,6 @@ force_X = zeros(size,totalTimeFrames);    %Storing the instantaneous X force
 force_Y = zeros(size,totalTimeFrames);    %Storing the instantaneous Y force
 
 
-
 for i = 1 : size-1
 
     spring(i) = struct('x',i,'y',i+1);
@@ -48,6 +47,7 @@ for i=2:size
     force_Y(i,1) = -m*g;
     
 end
+
 
 force_Y(1,1) = 0;
 
