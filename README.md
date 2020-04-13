@@ -28,19 +28,6 @@ All the outputs are given on the situation of a thread of length 10m, consisting
   - N: The total number of particles in the string for the simulation (Including the hinged particle)
   - TotalTime: The total duration of the simulation is speicified after this (In secs)
 
-### Quad Combine method
-
-Just like in the **DFTL_Quad** method, the value of *s_damping* is kept to be changing monotonously, it was tried to apply the same principle to the **FTL_Mem** method, where a similar *s_damping* is used, as the multiplying factor for the correction term involved corresponding to the positions of the particles. It was also considered having the velocity correction term as well and varying it's *s_damping* as well
-
-If we refer to the *s_damping* for the positions and velocites as *s_p* and *s_v* respectively, then the following major observations were obtained
-
-  - On decreasing only the *s_v*, having *s_p* as 0 gives the **DFTL_Quad** method
-  - On decreasing only the *s_p*, having *s_v* as 0 gives the system which has better performance than **FTL_Mem**, but is still more damped than the DFTL result
-  - On decreasing both the *s_v* and *s_p* makes the system much more damped and this has no physical significance either
-  - On increasing one and decreasing the other while having their sum to be a constant, simulates a behavior much similar to the one obtained from the DFTL with *s_damping* as the same constant 
-
-Thus, this method could act as a good theoretical improvement over DFTL, just that it will be **at least** as damped as the DFTL method. Also, an other important observation regarding this method was that that the energy plots for the physically feasible implementations of this method were not monotonically decreasing. Rather, they were having a significant increase in the energy in the beginning of the simulation (This jump was kind of negligible for the **DFTL_Quad** method)
-
 ## Summary of all the new algorithms for FTL
 
 ### DFTL_Quad
