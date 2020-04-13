@@ -152,7 +152,5 @@ for t = 1: 1: totalTimeFrames
       count = count + 1;
 end
 
-
-
 %}
 
