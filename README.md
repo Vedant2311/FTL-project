@@ -79,7 +79,7 @@ Thus, this method could act as a good theoretical improvement over DFTL, just th
 
 ### DFTL_Quad
 
-  - In the update rule of **v<sub>i</sub> = (p<sub>i</sub> - x<sub>i</sub>)/(&Delta;t) + s<sub>damping</sub>(-d<sub>i</sub>/&Delta;t)**
+  - In the update rule of **v<sub>i</sub> = (p<sub>i</sub> - x<sub>i</sub>)/(&Delta;t) + s<sub>damping</sub>(-d<sub>i+1</sub>/&Delta;t)**, the **s<sub>damping</sub>** is varying as **0.8 - 0.7(t/T)^2** rather than being a constant as in DFTL_Orig
   - Follows the same proof of correctness as the one for the DFTL method
   - Achieves a proper steady state velocity because of *s_damping* tending to 0 in the last time frames
   - Gets a **nearly** monotonus energy curve most of the times, as observed experimentally
