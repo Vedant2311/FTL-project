@@ -81,6 +81,7 @@ Thus, this method could act as a good theoretical improvement over DFTL, just th
   
 ### FTL_Mem
 
+  - Rather than the velocity correction equation **v<sub>i</sub> = (p<sub>i</sub> - x<sub>i</sub>)/(&Delta;t) + s<sub>damping</sub>(-d<sub>i+1</sub>/&Delta;t)** as used in the original implementation of DFTL, the same correction is added to the position update, which now becomes: **p<sub>i</sub> = x<sub>i</sub> + v<sub>i</sub>&Delta;t + f<sub>i</sub>(%Delta;t)^2 + s<sub>damping</sub>(-d<sub>i+1</sub>)** **
   - Follows a very straightforward proof, since the velocity update is trivial
   - Achieves a proper steady state velocity, because of the **prior** corrections 
   - Monotonously decreases energy for *s_damping*=1. Does not have for lower values of it, since the method then tends to be behaving like the typical FTL
