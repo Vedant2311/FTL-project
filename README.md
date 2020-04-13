@@ -69,11 +69,12 @@ Thus, this method could act as a good theoretical improvement over DFTL, just th
   - Gets a **nearly** monotonus energy curve most of the times, as observed experimentally
   - Has lesser damping than the DFTL, without getting unstable. 
   - The method looks natural because of continuous varations in the *s_damping*
-  - An issue that the value of s_damping is dependant on **t** and not on the **x,v** which makes it less flexible to external impulses by the user
+  - An issue that the value of s_damping is dependant on **t** and not on the **x,v** which makes it less flexible to external impulses or sudden external motions or interrupts given by the user
   
 ### FTL_Mem
 
   - Rather than the velocity correction equation **v<sub>i</sub> = (p<sub>i</sub> - x<sub>i</sub>)/(&Delta;t) + s<sub>damping</sub>(-d<sub>i+1</sub>/&Delta;t)** as used in the original implementation of DFTL, the same correction is added to the position update, which now becomes: **p<sub>i</sub> = x<sub>i</sub> + v<sub>i</sub>&Delta;t + f<sub>i</sub>(&Delta;t)<sup>2</sup> + s<sub>damping</sub>(-d<sub>i+1</sub>)**
+  - Has this benefit of theoretical soundness because of doing the corrections **prior** to the FTL update as compared to the DFTL implementation which does this correction **posterior** to the FTL-update
   - Follows a very straightforward proof, since the velocity update is trivial (**v<sub>i</sub> = (p<sub>i</sub> - x<sub>i</sub>)/(&Delta;t)**)
   - Achieves a proper steady state velocity, because of the **prior** corrections 
   - Monotonously decreases energy for *s_damping*=1. Does not have for lower values of it, since the method then tends to be behaving like the typical FTL
