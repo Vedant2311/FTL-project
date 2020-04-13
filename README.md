@@ -24,12 +24,12 @@ You can find the codes related to the FTL implementation in the directory **FTL_
 All the outputs are given on the situation of a thread of length 10m, consisting of 11 particles, with the mass of each particle being 1 Kg. The gravity constant is taken as 9.8 m/s2. The Spring constant is 1000 SI units and the damping constant is 5 SI units. Also, the time step is 0.05s and the total time for the algorithm to run is 8 or 10 seconds. The names of the videos correspond to their respective algorithms. Also, the Default frame rate corresponds to 100 images per frame
 
 But for specifying different values other than the default ones, the following conventions are used:
-  
-  - TS/TimeStep: The time step for the given simulation result is the value specified after this
-  - m: The mass of the particles for the given simulation is the float value given after this
-  - r: The distance between consequtive particles on the string is the value described after it
+  - TS/TimeStep: The time step for the given simulation result is the value specified after this (In s)
+  - m: The mass of the particles for the given simulation is the float value given after this (In Kg)
+  - r: The distance between consequtive particles on the string is the value described after it (In m)
   - S: The damping parameter *s_damping* for the DFTL simulation is the value given after this
   - N: The total number of particles in the string for the simulation (Including the hinged particle)
+  - TotalTime: The total duration of the simulation is speicified after this (In secs)
 
 ## About the Quad Method
 
