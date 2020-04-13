@@ -30,14 +30,6 @@ All the outputs are given on the situation of a thread of length 10m, consisting
   - N: The total number of particles in the string for the simulation (Including the hinged particle)
   - TotalTime: The total duration of the simulation is speicified after this (In secs)
 
-## About the Mem Method
-
-Rather than considering the changes in the positions of the other particles and incorporating them in the velocities of each particle, an other approach would be to do the same correction thing, but this time for the PBD positions of each particles. So here, the changes in the positions of the particles during the most recent correction step would be stored (i.e. in the **n-1**th time instant) and these will be used to obtain the **p_n** terms for each particles (i.e. the positions before the correction step)
-
-Note that, this method has the benefit of adding the correction for the uneven mass distribution **prior** to the actual FTL correction step, rather than account for the uneven mass distribution **after** the actual FTL correction step. This has a direct benefit of reporting proper velocities and showing a correct monotonously decreasing energy plot as expected. Also to avoid for the damping, a parameter of *s_damping* is introduced in this method, which is the same as the one in the DFTL method (With the values again being in the range of **0-1**)
-
-An important observation for this method is that it seems to be more damped than the DFTL method, with one reason being the initial increase of Energy in the DFTL plots, which is not seen in the case of this method. Comparision videos are included in the corresponding folder
-
 ## Some failed approaches
 
 While trying to find an improvement for the not-so-trivial method, various methods were employed and experimented in the high time step setting, and subsequently compared with the DFTL method. A big hindrance while trying to find any improvements ober this method is the fact that this method is very fast and seems to be performing the minimum computations. Some of the prominent methods developed during this process are as follows:
@@ -81,7 +73,7 @@ Thus, this method could act as a good theoretical improvement over DFTL, just th
   
 ### FTL_Mem
 
-  - Rather than the velocity correction equation **v<sub>i</sub> = (p<sub>i</sub> - x<sub>i</sub>)/(&Delta;t) + s<sub>damping</sub>(-d<sub>i+1</sub>/&Delta;t)** as used in the original implementation of DFTL, the same correction is added to the position update, which now becomes: **p<sub>i</sub> = x<sub>i</sub> + v<sub>i</sub>&Delta;t + f<sub>i</sub>(%Delta;t)^2 + s<sub>damping</sub>(-d<sub>i+1</sub>)** **
+  - Rather than the velocity correction equation **v<sub>i</sub> = (p<sub>i</sub> - x<sub>i</sub>)/(&Delta;t) + s<sub>damping</sub>(-d<sub>i+1</sub>/&Delta;t)** as used in the original implementation of DFTL, the same correction is added to the position update, which now becomes: **p<sub>i</sub> = x<sub>i</sub> + v<sub>i</sub>&Delta;t + f<sub>i</sub>(&Delta;t)<sup>2</sup> + s<sub>damping</sub>(-d<sub>i+1</sub>)**
   - Follows a very straightforward proof, since the velocity update is trivial
   - Achieves a proper steady state velocity, because of the **prior** corrections 
   - Monotonously decreases energy for *s_damping*=1. Does not have for lower values of it, since the method then tends to be behaving like the typical FTL
