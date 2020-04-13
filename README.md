@@ -15,25 +15,9 @@ New Approach: Stabilizing Integrators using https://www.cs.utah.edu/~ladislav/di
 
 ## About the codes
 
-All the codes are built on the same situation of an inextensible thread, assumed as a collection of some *n* number of particles, the distance between each of them to be fixed as *d*. The mass of each particles is *m* and the Gravity is taken as *g*. The user inputs the total number of particles, the time for the simulation, and the step size.
+All the codes are built on the same situation of an inextensible thread, assumed as a collection of some *n* number of particles, the distance between each of them to be fixed as *d*. The mass of each particles is *m* and the Gravity is taken as *g*. The user inputs the total number of particles, the time for the simulation, and the step size. 
 
-1. **Symplectic_Euler.m**: The system is implemented by the Symplectic Euler time integration. Here, the constraint for the fixed length is not taken into account
-
-2. **FTL_SE.m**: The System is implemented by the Symplectic Euler time Integration, along with taking into consideration the constraint for fixed length of the string by the Follow the Leader method
-
-3. **Backward_Euler.m**: The system is implemented by the Backward Euler time integration. Here, the constraint for the fixed length is not taken into account
-
-4. **CS_BE.m**: The System is implemented by the Backward Euler time Integration, along with taking into consideration the constraint for fixed length of the string by taking gradients and Jacobians (i.e Not by the FTL method). This method is proven to be tending to the real world system in the limits of the step size to be zero
-
-5. **DFTL_Orig.m**: The System is implemented by the Dynamic Follow the Leader Method, as mentioned in the Matthias paper
-
-6. **DFTL_Quad_S.m**: The new implementation has the *s_damping* value varying as a function to ensure that it is closer to 0 during the steady state. To solve the velocity issue of the ordinary DFTL. Also has an improved performance
-
-7. **FTL_Mem.m**: Rather than adding the correction to the velocties, the positions of the particles are updated to account for the issue of the uneven mass distribution
-
-8. **FTL_combine.m**: The new implementation for the DFTL having the property of energy conservation as well, by combining two different DFTLS and a FTL
-
-9. **FTL_Quad_Combine.m**: A combination of the position correction as well as the Velocity correction, with continuously varying parameters for both of them
+You can find the codes related to the FTL implementation in the directory **FTL_Codes** and some other standard time-integrator implementations of the given problem in the directory **Other_Codes**
 
 ## About the Videos
 
