@@ -30,14 +30,6 @@ All the outputs are given on the situation of a thread of length 10m, consisting
   - N: The total number of particles in the string for the simulation (Including the hinged particle)
   - TotalTime: The total duration of the simulation is speicified after this (In secs)
 
-## About the Quad Method
-
-The DFTL having improper steady state velocities is a very big issue indeed. But, there was also an observation that this method actually converges to the proper values of the velocities if the values of *s_damping* is tending to zero. So, here rather than having a fixed *s_damping*, it is implemented as a function which is going from 0.8 to 0.1 in a continuous manner, thus increasing the energy in the later stages appropriately as well has having the direction and value of the velocities of the particles to be physically consistent. 
-
-The plots and videos for this method as included with their corresponding name. Also, this method seems to have a better performance than the typical DFTL method, though with an assumption that the total time for the Animation is not much more than the time taken for the system to reach the steady state, else the improvement won't be that significantly observable. A comparision for the trace obtained for this method and the trace corresponding to the DFTL with the string of mass 500 grams and length 50 cm is attached in the corresponding folder
-
-Thus, inspite of the unpredictable energy pattern of the DFTL method, since the lower values of *s_damping* are very unstable, we can say that this method will in-general behave better than the DFTL method. Also, it is trivial to say that it will behave **at most** as damped as the original DFTL method. Also, by a thorough experimental analysis, it was found that this method shows a nearly monotnous energy trend, despite of the uneven energy trends in the individual DFTL simulations
-
 ## About the Mem Method
 
 Rather than considering the changes in the positions of the other particles and incorporating them in the velocities of each particle, an other approach would be to do the same correction thing, but this time for the PBD positions of each particles. So here, the changes in the positions of the particles during the most recent correction step would be stored (i.e. in the **n-1**th time instant) and these will be used to obtain the **p_n** terms for each particles (i.e. the positions before the correction step)
@@ -85,6 +77,7 @@ Thus, this method could act as a good theoretical improvement over DFTL, just th
   - Gets a **nearly** monotonus energy curve most of the times, as observed experimentally
   - Has lesser damping than the DFTL, without getting unstable. 
   - The method looks natural because of continuous varations in the *s_damping*
+  - An issue that the value of s_damping is dependant on **t** and not on the **x,v** which makes it less flexible to external impulses by the user
   
 ### FTL_Mem
 
