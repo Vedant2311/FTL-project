@@ -11,8 +11,6 @@ A method for solving this problem of Zero-stretch for dynamic simulations based 
   
 This work deals with tackling with these problems to improve the DFTL give an algorithm which solves the zero extension problem, is physically accurate (in the limits of the step size time tending to zero) and does not have such high artificial damping
 
-New Approach: Stabilizing Integrators using 
-
 ## About the codes
 
 All the codes are built on the same situation of an inextensible thread, assumed as a collection of some *n* number of particles, the distance between each of them to be fixed as *d*. The mass of each particles is *m* and the Gravity is taken as *g*. The user inputs the total number of particles, the time for the simulation, and the step size. 
@@ -76,6 +74,7 @@ Thus, this method could act as a good theoretical improvement over DFTL, just th
   
 ### DFTL_Quad_Combine
 
+  - Combining the principles of **DFTL_Mem** and **DFTL_Quad** and having both the position and velocity corrections as well as their corresponding coefficients (**s<sub>p</sub>** and **s<sub>v</sub>** respectvely) being time-varying as per the corresponding functions **f<sub>p</sub>(t)** and **f<sub>v</sub>(t)** respectively
   - The proof for the correctness of this algorithm will be pretty involved in it's general case and so that will need a better mathematical demonstration for it's correctness, a part we are leaving as of now
   - Achieves a proper steady state velocity
   - Does **NOT** follow a monotonous Energy curve and shows a peak in the Energy curve in th beginning
@@ -85,3 +84,4 @@ Thus, this method could act as a good theoretical improvement over DFTL, just th
 ### DFTL_Blend
   
   - Blending two different DFTLs with s_damping=0 and s_damping=1 respectively, as per applying binary search on a parameter &alpha; as described in https://www.cs.utah.edu/~ladislav/dinev18stabilizing/dinev18stabilizing.html
+  - But it is **NOT** possible to blend two different DFTLs since both of them will be satisfying the string length constraints, and so for their blend to also satisfy this constraint; we would require that &alpha; is either 0 or 1
