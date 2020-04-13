@@ -166,5 +166,10 @@ for t = 1 : 3 : totalTimeFrames
 end
 
 legend_str = {'DFTL_{Orig}','','DFTL_{Quad}'};
-
 legend(legend_str{1},legend_str{3});
+
+
+
+
+
+
