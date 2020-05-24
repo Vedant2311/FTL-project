@@ -90,24 +90,24 @@ Kn = zeros(2*size, 2*size);
 Cn = zeros(2*size, 2*size);
 
 % The constraint Vector
-cons_n = zeros(size -1, 1);
+cons_n = zeros(size +1, 1);
 
 % Jacobian and it's transpose 
-Jtn = zeros(2*size, size-1);
-Jn = zeros(size-1 , 2*size);
+Jtn = zeros(2*size, size+1);
+Jn = zeros(size+1 , 2*size);
 
-lambda = zeros(size-1, 1);
+lambda = zeros(size+1, 1);
 
 Dx = zeros(2*size,1);
 
-Zero_mat = zeros(size-1, size-1);
+Zero_mat = zeros(size+1, size+1);
 
 % The three matrices used for the Final Calculations of the BE with
 % constrained Dynamics
-LHS_mat = zeros(3*size -1, 3*size -1);
-RHS_mat = zeros(3*size -1 , 1);
+LHS_mat = zeros(3*size +1, 3*size +1);
+RHS_mat = zeros(3*size +1 , 1);
 
-Result_mat = zeros(3*size - 1,1);
+Result_mat = zeros(3*size + 1,1);
 
 for t= 2:totalTimeFrames
   
@@ -123,7 +123,8 @@ for t= 2:totalTimeFrames
         
     end
     
-    % Jacobians and Forces
+    % All the constraints corresponding to the relative distances between
+    % the vectors, along with the Jacobians
     for i=1:size-1
     
         Delta_x(1,1) = X_mat(i,t-1) - X_mat(i+1,t-1);
@@ -131,6 +132,7 @@ for t= 2:totalTimeFrames
         
         % Initializing the Constraint Vector
         cons_n(i,1) = (Delta_x(1,1))^2 + (Delta_x(2,1))^2 - r^2;
+        
         
         if (i==1) 
             
@@ -145,6 +147,11 @@ for t= 2:totalTimeFrames
             
             Jtn([(2*i-1) (2*i)], i-1) = -2 * Delta_x_old;
             
+        end
+        
+        % Adding the constraint for the last particle as well
+        if i==size-1
+            Jtn([(2*size-1) (2*size)],i) = -2 * Delta_x;            
         end
         
         Jv = eye(2) * k_d;
@@ -167,6 +174,12 @@ for t= 2:totalTimeFrames
               
     end
     
+    % Constraints corresponding to the first particle
+    cons_n(size,1) = X_mat(1,t-1);
+    cons_n(size+1,1) = Y_mat(1,t-1);
+    Jtn(1,size) = 1;    % Derivative w.r.t X_0
+    Jtn(2,size+1) = 1;  % Derivative w.r.t Y_0
+    
     % Applying the BE and the Constraint Satisfaction
     Kn = -Dfx;
     Cn = -Dfv;
@@ -185,7 +198,7 @@ for t= 2:totalTimeFrames
     Dx = Result_mat(1:2*size);
         
      % Applying the BE time step
-     for i=2:size
+     for i=1:size
             
             force_X(i,t) = 0;
             force_Y(i,t) = -m * g;
@@ -246,7 +259,7 @@ end
 count = 1;
 
 % Sampling the Images for the Animation
-for t = 1: 100: totalTimeFrames
+for t = 1: 2: totalTimeFrames
     
     h = figure('visible','off');
     
