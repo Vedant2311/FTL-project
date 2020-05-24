@@ -27,6 +27,8 @@ All the outputs are given on the situation of a thread of length 10m, consisting
   - S: The damping parameter *s_damping* for the DFTL simulation is the value given after this
   - N: The total number of particles in the string for the simulation (Including the hinged particle)
   - TotalTime: The total duration of the simulation is speicified after this (In secs)
+  - ks: Spring force constant between each consequtive particles as per the model assumed
+  - kd: Damping force constant corresponding to each springs, as per the considered model
 
 ## Summary of all the new algorithms for FTL
 
