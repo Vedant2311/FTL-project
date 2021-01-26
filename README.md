@@ -1,6 +1,6 @@
 # FTL-project
 
-**Note**: Refer to the results branch to get the detailed analyis of the experimental results obtained by us.
+**Note**: *Refer to the results branch of this repository to get the detailed analyis of the experimental results obtained by us.*
 
 Simulating hair and fur is very common in the field of Computer Graphics. One of the main challenges for the simulations of these objects is to guarantee a zero extension in their length, since they are supposed to be non-deformable (Think of how things would be if you pull your hair along their length and they keep elongating like a spring!). One method to solve is problem is an extension of a technique called *Follow the Leader (FTL)* (http://robotics.stanford.edu/~latombe/papers/knotmaking/paper.pdf)
 
