@@ -53,7 +53,6 @@ All the outputs are given on the situation of a thread of length 10m, consisting
 ### FTL_Combine
   
   - A DFTL **D<sub>1</sub>** (with *s_damping* as s<sub>1</sub>) is run and the total energy of the system **E<sub>total</sub>** is calculated and then it is compared with the initial Energy **E<sub>0</sub>** and then we check for **|E<sub>total</sub>-E<sub>0</sub>| < C**: if it's true then we continue with the next time-step, else we run the DFTL **D<sub>2</sub>** (with *s_damping* as s<sub>2</sub>) which will be unstable in nature and will help to increase the energy
-  - Follows the same proof of correctness as the one for the DFTL method
   - Does **NOT** achieve a proper steady state velocity
   - Does **NOT** have a proper monotonous Energy curve
   - Has lesser damping than DFTL, but it **may** get unstable in some circumstances because of the unpredictable nature of the DFTL plots
@@ -62,7 +61,6 @@ All the outputs are given on the situation of a thread of length 10m, consisting
 ### DFTL_Quad_Combine
 
   - Combining the principles of **DFTL_Mem** and **DFTL_Quad** and having both the position and velocity corrections as well as their corresponding coefficients (**s<sub>p</sub>** and **s<sub>v</sub>** respectvely) being time-varying as per the corresponding functions **f<sub>p</sub>(t)** and **f<sub>v</sub>(t)** respectively
-  - The proof for the correctness of this algorithm will be pretty involved in it's general case and so that will need a better mathematical demonstration for it's correctness, a part we are leaving as of now
   - Achieves a proper steady state velocity
   - Does **NOT** follow a monotonous Energy curve and shows a peak in the Energy curve in th beginning
   - More stable and Damped than DFTL (In the physically relevant implementations)
