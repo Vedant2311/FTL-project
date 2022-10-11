@@ -11,7 +11,7 @@ A method for solving this problem of Zero-stretch for dynamic simulations based 
   - An improper Energy curve
   - A lot of Artificial damping
   
-This work deals with tackling with these problems to improve the DFTL give an algorithm which solves the zero extension problem, is physically accurate (in the limits of the step size time tending to zero) and does not have such high artificial damping
+This work deals with tackling with these problems to improve the DFTL give an algorithm which solves the zero extension problem, is physically accurate (in the limits of the step size time tending to zero) and does not have such high artificial damping. The results of the experimentations done by us can be found in **FTL_Analysis_results.pdf**. Moreover, we also give the proof of correctness for the DFTL method; proving that the method would correspond to physically accurate solutions, for particular parameter settings, with the time-step tending to zero. The proof can be found in **DFTL_anaylsis.pdf**
 
 ## About the codes
 
